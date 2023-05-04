@@ -1,0 +1,16 @@
+.employee-option {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.employee-option:hover {
+    color: #CD5888;
+}
+
+.title {
+  font-size: 1.4em;
+}
+
+.content-text {
+  font-size: 1.2em;
+}

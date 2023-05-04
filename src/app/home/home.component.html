@@ -1,0 +1,9 @@
+<p class="title" style="font-size: 60px;">Home</p>
+
+
+
+<ul class="content-text">
+<li class="employee-option" *ngFor="let employee of employeesToShow">
+    <a (click)="handleOnEmployeeClick(employee.id)">{{employee.name + " " + employee.lastname}}</a>
+</li>
+</ul>

@@ -1,0 +1,80 @@
+.nav-panel {
+  display: flex;
+  padding: 0.5em 1.5em;
+  background-color: #20262E;
+
+
+}
+
+.container {
+  min-height: 100%;
+  background: url(../assets/mainBg.png) center/cover no-repeat;
+}
+
+.nav-panel {
+  margin-top: 20px;
+}
+
+
+
+.close-btn {
+  display: block;
+  background-color: #20262E;
+  color: #E9E8E8;
+  width: 100%;
+  padding: 0.5em 1.5em;
+  margin-top: 50px;
+  transition: .3s all;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  border-radius: 10px;
+  background-color: #13171b;
+}
+
+.list-container {
+  display: block;
+  margin-bottom: 2em;
+}
+
+.card-view {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 0px;
+  display: flex;
+  flex-direction: column;
+  padding: .5em 1.3em;
+  border: 1px solid #20262ea1;
+  border-radius: 10px;
+  margin-right: 1.3em;
+}
+
+.change-view-btn {
+  padding: .5em 1.3em;
+  background-color: transparent;
+  color: #20262E;
+  border: 2px solid #20262E;
+  font-size: 1em;
+  transition: .3s all;
+}
+
+.change-view-btn:hover {
+  border-radius: 10px;
+  background-color: #20262E;
+  color: white;
+}
+
+.container {
+  padding: 50px 50px 150px;
+}
+
+@media screen and (max-width: 959px) {
+  .container {
+    padding: 30px 30px 150px;
+  }
+}

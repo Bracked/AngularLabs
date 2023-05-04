@@ -1,0 +1,26 @@
+<ng-container *ngIf="selectedEmployee">
+  <div class="employee-info-container">
+    <p class="employee-info-title">Employee information: </p>
+    <p>
+      Name:
+      <span class="bold-text">{{
+        selectedEmployee.name + " " + selectedEmployee.lastname
+      }}</span>
+    </p>
+    <p>
+      Date of birth:
+      <span class="bold-text">
+        {{ selectedEmployee.dateOfBirth | date : "mediumDate" }}</span
+      >
+    </p>
+    <p>
+      Salary:
+      <span class="bold-text">{{ selectedEmployee.salary | currency }}</span>
+    </p>
+    <p>
+      Working hours:
+      <span class="bold-text"> {{ selectedEmployee.workingHours | workinghours }}</span>
+    </p>
+    <button [routerLink]="'/home'" class="back-home-btn" style="background-color: blue;">Return</button>
+  </div>
+</ng-container>

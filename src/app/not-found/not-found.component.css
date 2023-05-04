@@ -1,0 +1,18 @@
+.not-found-title {
+    font-size: 4em;
+    color: black;
+}
+
+.back-home-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #20262E;
+    color: #E9E8E8;
+    transition: .3s all;
+    padding: 1em;
+    font-size: 0.8em;
+}
+
+.back-home-btn:hover {
+    background-color: #353f4b;
+}

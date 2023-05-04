@@ -1,0 +1,195 @@
+<div class="page-layout">
+
+  <div class="form-panel" fxLayout="column" fxLayoutAlign="space-around center"
+       [fxLayoutAlign.xs]="'stretch'">
+    <button
+      mat-raised-button
+      style="margin-bottom: 30px"
+      *ngIf="!createNewFormActivated"
+      (click)="switchForm(true)"
+    >
+      Switch to create
+    </button>
+    <mat-card class="form">
+      <mat-card-header>
+        <h1>{{createNewFormActivated ? "Create" : "Update"}} user form: </h1>
+      </mat-card-header>
+      <mat-card-content>
+        <form
+          fxFill
+          [formGroup]="userForm"
+          fxLayout="column"
+          fxLayoutAlign="stretch"
+          (ngSubmit)="
+        createNewFormActivated ? onCreateNew() : onUpdateExisting(currentUser)
+      ">
+          <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput [errorStateMatcher]="errorStateMatcher" formControlName="name"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Last name</mat-label>
+            <input matInput [errorStateMatcher]="errorStateMatcher" formControlName="lastName"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Type:</mat-label>
+            <mat-select formControlName="type">
+              <ng-container *ngFor="let type of userTypes">
+                <mat-option [value]="type">{{ type }}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput [errorStateMatcher]="errorStateMatcher" formControlName="email"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput [errorStateMatcher]="errorStateMatcher"
+                   [type]="hidePassword ? 'password' : 'text'">
+            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill" *ngIf="createNewFormActivated">
+            <mat-label>Confirm password</mat-label>
+            <input formControlName="confirmPassword" matInput [errorStateMatcher]="passwordMismatchMatcher"
+                   [type]="hideConfirmationPassword ? 'password' : 'text'">
+            <button type="button" mat-icon-button matSuffix
+                    (click)="hideConfirmationPassword = !hideConfirmationPassword"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmationPassword">
+              <mat-icon>{{hideConfirmationPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <div>
+            <p class="form-text">Subjects: <span class="form-entry-action prevent-select"
+                                                 (click)="onAddSubject()">Add</span></p>
+            <div *ngFor="let _ of subjects.controls; let i = index">
+              <mat-form-field>
+                <mat-label>Subject</mat-label>
+                <input matInput [formControl]="$any(subjects.controls[i])"/>
+              </mat-form-field>
+              <span
+                class="form-text form-entry-action prevent-select"
+                style="margin-left: 15px"
+                (click)="onRemoveSubject(i)"
+              >Remove</span
+              >
+            </div>
+            <hr>
+          </div>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput></textarea>
+          </mat-form-field>
+          <div>
+            <p class="form-text">Float label:</p>
+            <mat-radio-group formControlName="sex">
+              <div *ngFor="let genderType of userSexTypes">
+                <mat-radio-button [value]="genderType">{{genderType}}</mat-radio-button>
+              </div>
+            </mat-radio-group>
+            <hr>
+          </div>
+          <br>
+          <mat-form-field>
+            <mat-label>Phone number</mat-label>
+            <input matInput [errorStateMatcher]="errorStateMatcher" formControlName="phone"/>
+          </mat-form-field>
+          <mat-card-actions>
+            <button style="width: 100%" mat-raised-button color="primary" type="submit"
+                    [disabled]="userForm.invalid">{{ createNewFormActivated ? "Create" : "Update" }}</button>
+          </mat-card-actions>
+
+        </form>
+      </mat-card-content>
+
+    </mat-card>
+
+  </div>
+
+  <div class="data-panel">
+    <mat-card style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.34); overflow-x: scroll;">
+      <table mat-table [dataSource]="myDataSource">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> LastName</th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Type</th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email</th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef> Gender</th>
+          <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef> Phone</th>
+          <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <div fxLayout>
+              <button mat-raised-button color="accent" style="margin-right: 20px" (click)="onUpdate(element.id)">Update</button>
+              <button mat-raised-button color="warn" (click)="onDelete(element.id)">Delete</button>
+            </div>
+          </td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+
+        <!--      <tr>-->
+        <!--        <th class="cell">Name:</th>-->
+        <!--        <th class="cell">LastName:</th>-->
+        <!--        <th class="cell">Type:</th>-->
+        <!--        <th class="cell">Gender:</th>-->
+        <!--        <th class="cell">PhoneNumber:</th>-->
+        <!--        <th class="cell">Action:</th>-->
+        <!--      </tr>-->
+
+        <!--      <tr *ngFor="let user of users">-->
+        <!--        <td class="cell">{{ user.name }}</td>-->
+        <!--        <td class="cell">{{ user.lastName }}</td>-->
+        <!--        <td class="cell">{{ user.type }}</td>-->
+        <!--        <td class="cell">{{ user.sex }}</td>-->
+        <!--        <td class="cell">{{ user.phone }}</td>-->
+        <!--        <td class="cell">-->
+        <!--          <div class="cell-action">-->
+        <!--            <div>-->
+        <!--              <button class="table-action-btn" style="margin-right: 5px;" (click)="onDelete(user.id)">-->
+        <!--                Delete-->
+        <!--              </button>-->
+        <!--              <button class="table-action-btn" style="margin-left: 5px;" (click)="onUpdate(user.id)">-->
+        <!--                Update-->
+        <!--              </button>-->
+        <!--            </div>-->
+        <!--          </div>-->
+
+        <!--        </td>-->
+        <!--      </tr>-->
+      </table>
+    </mat-card>
+
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<!--<div class="nav-options-container">-->
+<div class="container">
+  <div [fxLayout.gt-xs]="'row'" [fxLayout.xs]="'column'">
+    <ng-container *ngFor="let option of navOptions">
+      <span
+        (click)="onOptionChanged(option.id)"
+        [routerLink]="option.link"
+        [queryParams]="{information: option.information}"
+        class="nav-option"
+        [ngClass]="{ 'nav-option-selected': option.selected }"
+      >
+        {{ option.name }}
+      </span>
+    </ng-container>
+  </div>
+</div>

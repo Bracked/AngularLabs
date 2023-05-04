@@ -1,0 +1,31 @@
+.bold-text {
+    font-weight: bold;
+}
+
+.employee-info-container {
+    border: 1px solid #20262E;
+    background: #FFf;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+}
+
+.employee-info-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.back-home-btn {
+    border: none;
+    border-radius: 10px;
+    background-color: #20262E;
+    color: #E9E8E8;
+    transition: .3s all;
+    padding: 1em;
+    font-size: 0.8em;
+}
+
+.back-home-btn:hover {
+    background-color: #DD0031;
+}
+

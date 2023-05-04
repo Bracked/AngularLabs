@@ -1,0 +1,12 @@
+.page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #E9E8E8;
+    padding: 40px 1.5em;
+    background-color: #20262E;
+    min-height: 3em;
+}
